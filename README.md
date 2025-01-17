@@ -15,7 +15,7 @@ Ich konnte mir eine idee bilden was ich jetzt machen könnte und habe mit der um
 
 17.1.2025
 
- - [ ] Cookie Spielt animation beim drücken
+ - [ ] Cookie Spielt animation beim drücken (REPARIEREN!!!!!)
  - [ ] Partikel erscheinen beim drücken
  - [ ] Erste Automation kaufbar
- - [ ] Automation fügd zur cps hinzu
+ - [ ] Automation fügt zur cps hinzu
