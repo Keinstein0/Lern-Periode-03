@@ -15,7 +15,17 @@ Ich konnte mir eine idee bilden was ich jetzt machen könnte und habe mit der um
 
 17.1.2025
 
- - [ ] Cookie Spielt animation beim drücken (REPARIEREN!!!!!)
+ - [X] Cookie Spielt animation beim drücken (REPARIEREN!!!!!)
  - [ ] Partikel erscheinen beim drücken
- - [ ] Erste Automation kaufbar
+ - [X] Erste Automation kaufbar
  - [ ] Automation fügt zur cps hinzu
+
+Heute Konnte ich fast alle meine ziele Erreichen. Alle ausse das 2. Ziel da das unmöglich ist. Alles hat perfekt funktioniert ausser dass ich jetzt 280 bilder habe von denen ich den hintergrund entfernen muss.
+
+24.1.2025
+
+ - [ ] Automation fügt zur CPS hinzu
+ - [ ] Bilder nur in File zugreifbar
+ - [ ] Cookie Animationen Repariert
+
+
