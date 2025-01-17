@@ -83,6 +83,16 @@ namespace CookieClicker.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap panelVertical {
+            get {
+                object obj = ResourceManager.GetObject("panelVertical", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap shine {
             get {
                 object obj = ResourceManager.GetObject("shine", resourceCulture);
