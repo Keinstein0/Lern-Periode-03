@@ -1,5 +1,4 @@
 # Lern-Periode-03
-Janky Graphic engine in console cursed creation thing
 *10.1 bis 24.1*
 
 Grob-Planung
