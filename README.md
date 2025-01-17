@@ -20,7 +20,7 @@ Ich konnte mir eine idee bilden was ich jetzt machen könnte und habe mit der um
  - [X] Erste Automation kaufbar
  - [ ] Automation fügt zur cps hinzu
 
-Heute Konnte ich fast alle meine ziele Erreichen. Alle ausse das 2. Ziel da das unmöglich ist. Alles hat perfekt funktioniert ausser dass ich jetzt 280 bilder habe von denen ich den hintergrund entfernen muss.
+Heute Konnte ich fast alle meine ziele Erreichen. Alle ausse das 2. Ziel da das unmöglich ist. Alles hat perfekt funktioniert ausser dass ich jetzt 280 bilder habe von denen ich den hintergrund entfernen muss. Code kann leider nur auf meinem gerät laufen wegen file Chaos :(
 
 24.1.2025
 
