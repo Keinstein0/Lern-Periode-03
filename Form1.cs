@@ -8,26 +8,37 @@ namespace CookieClicker
     {
         int cookies = 0;
         int clickStrength = 1;
-        bool cookieSize = true;
+        int cookieSizeTarget = 50;
         int csSpeed = 0;
         int cps = 0;
+        bool mic = false;
         StoreEntry grandmother;
 
         public Form1()
         {
             InitializeComponent();
             always();
+            alwaysSecond();
 
             Thread spinny = new Thread(spinnyThing);
             spinny.Start();
 
-            resize(cookie, 660);
+            cookie.MouseEnter += OnMouseEntercookie;
+            cookie.MouseLeave += OnMouseLeavecookie;
+            
 
-            grandmother = new StoreEntry(1, this, @"C:\Users\alex\source\repos\CookieClicker\CookieClicker\grandmaIcon.png", "Grandma", 100);
+            resize(50);
+
+            grandmother = new StoreEntry(1, this, @"..\..\..\..\CookieClicker\grandmaIcon.png", "Grandma", 100,1);
 
             //StoreEntry whatever = new StoreEntry(2,this);
         }
 
+        public void purchase(int addCps, int cost)
+        {
+            cps += addCps;
+            cookies -= cost;
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -38,11 +49,22 @@ namespace CookieClicker
             
         }
 
-        private void cookie_Click(object sender, EventArgs e)
+        private async void cookie_Click(object sender, EventArgs e)
         {
             cookies += clickStrength;
-            cookieTotal.Text = $"{cookies} cookies";
-            cookieSize = false;
+            
+            cookieSizeTarget = 20;
+
+            await Task.Delay(300);
+
+            cookieSizeTarget = 50;
+            if (mic)
+            {
+                cookieSizeTarget = 90;
+            }
+
+
+
             /*
             if (ApiInformation.IsMethodPresent("Windows.UI.Xaml.Media.Imaging.BitmapImage", "Play"))
             {
@@ -50,39 +72,59 @@ namespace CookieClicker
             }*/
 
         }
+        private void OnMouseEntercookie(object sender, EventArgs e)
+        {
+            cookieSizeTarget = 90;
+            mic = true;
+            
+        }
+        private void OnMouseLeavecookie(object sender, EventArgs e)
+        {
+            cookieSizeTarget = 50;
+            mic = false;
+        }
+
+
+
+
+
         private async void always()
         {
             bool nextFrame = false;
-
+            double resizeSpeed = 0;
+            int accSize = 50;
+            int accLast = 50;
 
             while (true)
             {
                 await Task.Delay(10);
 
-                if (!cookieSize)
-                {
-                    cookieSize = true;
+                resize(accSize);
 
-                    resize(cookie, 640);
-
-                    await Task.Delay(50);
+                accSize = Convert.ToInt32(accSize + resizeSpeed);
 
 
 
-                    resize(cookie, 660);
+                resizeSpeed = (cookieSizeTarget - accLast) * 0.3;
+                accLast = accSize;
 
-                }
                 cookiesPS.Text = $"{cps} per second";
+                cookieTotal.Text = $"{cookies} cookies";
                 grandmother.render(cookies);
 
 
             }
         }
-        public void purchase(int addCps,int cost)
+        private async void alwaysSecond()
         {
-            cps += addCps;
-            cookies -= cost;
+            while (true)
+            {
+                await Task.Delay(1000);
+                cookies += cps;
+            }
         }
+
+
 
         private async void spinnyThing()
         {
@@ -90,7 +132,7 @@ namespace CookieClicker
 
             for (int i = 0; i < 280; i++)
             {
-                Image img = Image.FromFile($@"C:\Users\alex\Downloads\images\0117-{i}.png"); //FIX IMMEDIATELY
+                Image img = Image.FromFile($@"..\..\..\..\CookieClicker\imagesBG\0117(2)-{i}.png"); 
 
                 frames.Add(new Bitmap(img));
             }
@@ -99,7 +141,7 @@ namespace CookieClicker
             int index = 0;
             while (true)
             {
-                await Task.Delay(20);
+                await Task.Delay(35);
                 index++;
 
                 cookie.BackgroundImage = frames[index];
@@ -113,46 +155,20 @@ namespace CookieClicker
             }
         }
 
+        
 
-        public void resize(Button button, int newWidth)
+        
+        public void resize(int size)
         {
-            if (button == null || newWidth <= 0)
-                throw new ArgumentException("Invalid button or width.");
+            cookie.ImageAlign = ContentAlignment.MiddleCenter;
 
-            float aspectRatio = (float)button.Height / button.Width;
+            size = Math.Clamp(size, 0, 99);
 
-            int newHeight = (int)(newWidth * aspectRatio);
+            Image image = Image.FromFile(@$"..\..\..\..\CookieClicker\imagesCookie\cookieAnimation-{size}.png");
 
-            Point center = new Point(button.Left + button.Width / 2, button.Top + button.Height / 2);
-
-            button.Size = new Size(newWidth, newHeight);
-
-            button.Left = center.X - button.Width / 2;
-            button.Top = center.Y - button.Height / 2;
-
-
-            button.ImageAlign = ContentAlignment.MiddleCenter;
-            button.TextAlign = ContentAlignment.MiddleCenter; // Adjust if text is present
-
-            Image originalImage = Image.FromFile(@"C:\Users\alex\Downloads\cookie-cookie-from-cookie-clicker-11563236737bj2c4xyraj-removebg-preview (1).png"); // FIX ASAP Really bad stuff right here
-
-            float newiWidth = newWidth - 250;
-
-            int targetHeight = (int)(newiWidth / aspectRatio);
-
-            Bitmap resizedImage = new Bitmap(originalImage, new Size(Convert.ToInt32(newiWidth), targetHeight));
-
-            button.Image = resizedImage;
-
-            if (newiWidth == 664)
-            {
-                button.Image = originalImage;
-            }
-
-
-
-
+            cookie.Image = new Bitmap(image, new Size(400, 400));
         }
+
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
@@ -166,26 +182,29 @@ namespace CookieClicker
     }
 }
 
-public class StoreEntry:Form
+public partial class StoreEntry : Form
 {
     int pos;
     int cost;
     int cookies;
+    int cps;
     Button button = new Button();
     Label nameLabel = new Label();
     Label costLabel = new Label();
-    Form form;
-    public StoreEntry(int pos,Form form,string icon,string name, int cost)
+    Form1 form;
+    //public partial void purchase();
+    public StoreEntry(int pos,Form1 form,string icon,string name, int cost, int cps)
     {
         this.pos = pos;
         this.cost = cost;
         this.form = form;
+        this.cps = cps;
 
         button.Location = new Point(1310,150+(pos*120));
         button.Size = new Size(500,120);
         button.Visible = true;
 
-        button.BackgroundImage = Image.FromFile(@"C:\Users\alex\source\repos\CookieClicker\CookieClicker\storeTile.jpg");
+        button.BackgroundImage = Image.FromFile(@"..\..\..\..\CookieClicker\storeTile.jpg");
         button.BackgroundImageLayout = ImageLayout.Stretch;
 
         button.Image = Image.FromFile(icon);
@@ -200,7 +219,7 @@ public class StoreEntry:Form
 
         costLabel.Location = new Point(1410, 220 + (pos*120));
         costLabel.Size = new Size(170, 30);
-        costLabel.Font = new Font("Mictosoft Himalaya", 9, FontStyle.Bold);
+        costLabel.Font = new Font("Microsoft Himalya", 9, FontStyle.Bold);
         costLabel.Text = Convert.ToString(cost);
         costLabel.BackColor = Color.FromArgb(177, 174, 161);
         costLabel.ForeColor = Color.Firebrick;
@@ -224,6 +243,7 @@ public class StoreEntry:Form
             costLabel.ForeColor = Color.Red;
         }
         cookies = amountOfCookies;
+        costLabel.Text = Convert.ToString(cost);
     }
     
     private void shopClick(object sender, EventArgs e)
@@ -231,7 +251,11 @@ public class StoreEntry:Form
         //Button clickedButton = sender as Button;
         if (cost <= cookies)
         {
-            form.purchase(1, cost);
+            Console.WriteLine(form);
+            form.purchase(cps,cost);
+
+            cost = Convert.ToInt32(cost * 1.15);
+            
         }
 
 
