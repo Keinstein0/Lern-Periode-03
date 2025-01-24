@@ -29,3 +29,7 @@ Heute Konnte ich fast alle meine ziele Erreichen. Alle ausse das 2. Ziel da das 
 
 Die heutigen Arbeitspakete dauerten kürzer als sonst. Ich konnte animationen hinzufügen und alle notwendigen files hochladen. Zudem habe ich die Filepaaths gefixt so dass das spiel jetzt auf jedem gerät funktionieren sollte.
 
+
+https://github.com/user-attachments/assets/1dfd09b0-2a93-4c8e-8d1b-04e2b89c1044
+
+
