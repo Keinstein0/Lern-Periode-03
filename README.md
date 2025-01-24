@@ -23,8 +23,9 @@ Heute Konnte ich fast alle meine ziele Erreichen. Alle ausse das 2. Ziel da das 
 
 24.1.2025
 
- - [ ] Automation fügt zur CPS hinzu
- - [ ] Bilder nur in File zugreifbar
- - [ ] Cookie Animationen Repariert
+ - [X] Automation fügt zur CPS hinzu
+ - [X] Bilder nur in File zugreifbar
+ - [X] Cookie Animationen Repariert
 
+Die heutigen Arbeitspakete dauerten kürzer als sonst. Ich konnte animationen hinzufügen und alle notwendigen files hochladen. Zudem habe ich die Filepaaths gefixt so dass das spiel jetzt auf jedem gerät funktionieren sollte.
 
